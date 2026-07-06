@@ -160,7 +160,7 @@ $users = $db->query("SELECT * FROM users WHERE role = 'user' ORDER BY username")
     </div>
 
     <div class="admin-section section-events" style="border-top: 5px solid #ff9800;">
-        <h2>Gerenciar Eventos / Campeonatos 🏆</h2>
+        <h2>Gerenciar Eventos / Campeonatos </h2>
 
         <h3>Cadastrar Novo Torneio</h3>
         <form method="POST" class="admin-form-inner">
@@ -178,7 +178,7 @@ $users = $db->query("SELECT * FROM users WHERE role = 'user' ORDER BY username")
             </div>
 
             <hr style="border: 0; border-top: 1px dashed #333; margin: 1.5rem 0;">
-            <p style="color: #d32f2f; font-weight: bold; margin-bottom: 10px;">👇 Dica: Nas caixas abaixo, pressione ENTER para criar um novo tópico/linha!</p>
+            <p style="color: #d32f2f; font-weight: bold; margin-bottom: 10px;"> Dica: Nas caixas abaixo, pressione ENTER para criar um novo tópico/linha!</p>
 
             <div class="form-group">
                 <label>Regras do Torneio:</label>
