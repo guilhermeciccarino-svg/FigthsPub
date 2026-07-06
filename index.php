@@ -573,17 +573,32 @@ $uid  = (int)$_SESSION['user_id'];
 $badge_class = 'badge-user';   $badge_label = 'Atleta';         $welcome_icon = '🥋';
 if ($role == 'admin')      { $badge_class = 'badge-admin';      $badge_label = 'Administrador'; $welcome_icon = '👑'; }
 if ($role == 'instructor') { $badge_class = 'badge-instructor'; $badge_label = 'Instrutor';     $welcome_icon = '🥊'; }
+
+// Fetch the user's avatar
+$stmt_avatar = $db->prepare("SELECT avatar FROM users WHERE id = :id");
+$stmt_avatar->bindValue(':id', $uid, SQLITE3_INTEGER);
+$user_data = $stmt_avatar->execute()->fetchArray(SQLITE3_ASSOC);
+$user_avatar = $user_data['avatar'] ?? null;
 ?>
-    <div class="dash-welcome">
-        <div class="dash-welcome-text">
-            <h1><?php echo $welcome_icon; ?> Olá, <?php echo htmlspecialchars($_SESSION['username']); ?>!</h1>
-            <p>Hoje é <strong style="color:#fff"><?php echo $hoje_nome; ?>-feira</strong>.
-            <?php
-            if ($role == 'admin')          echo 'O tatame está sob o teu comando.';
-            elseif ($role == 'instructor') echo 'Os teus alunos contam contigo.';
-            else                           echo 'Bom treino — um dia de cada vez.';
-            ?>
-            </p>
+    <div class="dash-welcome" style="display: flex; align-items: center; justify-content: space-between;">
+        <div style="display: flex; align-items: center; gap: 1.5rem;">
+            <div class="profile-avatar" style="width: 80px; height: 80px; border: 3px solid #d32f2f; border-radius: 50%; display: flex; align-items: center; justify-content: center; overflow: hidden; background: #1a1a1a; flex-shrink: 0;">
+                <?php if (!empty($user_avatar)): ?>
+                    <img src="<?php echo htmlspecialchars($user_avatar); ?>" alt="Avatar" style="width: 100%; height: 100%; object-fit: cover;">
+                <?php else: ?>
+                    <span style="font-size: 2.5rem;"><?php echo $welcome_icon; ?></span>
+                <?php endif; ?>
+            </div>
+            <div class="dash-welcome-text">
+                <h1 style="text-transform: uppercase;">OLÁ, <?php echo htmlspecialchars($_SESSION['username']); ?>!</h1>
+                <p>Hoje é <strong style="color:#fff"><?php echo $hoje_nome; ?>-feira</strong>.
+                <?php
+                if ($role == 'admin')          echo 'O tatame está sob o teu comando.';
+                elseif ($role == 'instructor') echo 'Os teus alunos contam contigo.';
+                else                           echo 'Bom treino — um dia de cada vez.';
+                ?>
+                </p>
+            </div>
         </div>
         <span class="dash-welcome-badge <?php echo $badge_class; ?>"><?php echo $badge_label; ?></span>
     </div>
