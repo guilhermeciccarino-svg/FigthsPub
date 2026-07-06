@@ -39,6 +39,8 @@
         --border:      #e0ded9;
         --header-bg:   rgba(255, 255, 255, 0.98); /* Header branco */
         --input-bg:    #f5f4f0; /* Inputs claros */
+        --shadow-red:  0 10px 24px rgba(184, 146, 20, 0.35); /* Shadow dourada */
+        --primary-glow: rgba(184, 146, 20, 0.45);
     }
 }
 /* ================= RESET GERAL ================= */
@@ -431,6 +433,15 @@ form {
     border-top: 5px solid var(--primary);
 }
 
+.form-inline {
+    background: none;
+    border: none;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+    display: inline-block;
+}
+
 .form-group { margin-bottom: 1.5rem; }
 
 label {
@@ -541,7 +552,7 @@ textarea { height: 120px; resize: vertical; }
 
 /* Autenticação (Login/Registro) */
 .auth-container { max-width: 450px; margin: 4rem auto; padding: 3rem; border-radius: 8px; border-top: 6px solid var(--primary); background: var(--white); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
-.auth-container form { margin: 0; padding: 0; border: none; box-shadow: none; } 
+.auth-container form { margin: 0; padding: 0; border: none; box-shadow: none; }
 .auth-header { text-align: center; margin-bottom: 2rem; }
 .auth-header h1 { font-size: 2.5rem; border: none; }
 .auth-footer { text-align: center; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
@@ -595,8 +606,8 @@ textarea { height: 120px; resize: vertical; }
 .ranking-header { text-align: center; margin-bottom: 3rem; }
 .ranking-header h1 { font-size: 3rem; border: none; }
 .rank-badge { display: inline-block; background-color: var(--dark); color: var(--white); font-family: 'Oswald', sans-serif; font-size: 1.5rem; font-weight: bold; padding: 0.5rem 1.5rem; border-radius: 4px; margin-bottom: 1rem; }
-.rank-1 .rank-badge { background-color: #ffd700; color: #111; } 
-.rank-2 .rank-badge { background-color: #c0c0c0; color: #111; } 
+.rank-1 .rank-badge { background-color: #ffd700; color: #111; }
+.rank-2 .rank-badge { background-color: #c0c0c0; color: #111; }
 .rank-3 .rank-badge { background-color: #cd7f32; color: var(--white); }
 .total-score { width: 100%; border-top: 1px solid var(--card-border); margin-top: 0.5rem; padding-top: 0.5rem; font-size: 1.1rem; color: #ccc; }
 .total-score span { color: var(--primary); font-size: 1.4rem; font-weight: bold; }
@@ -632,30 +643,30 @@ footer a:hover { color: var(--white); }
         box-shadow: none;
     }
 
-    .logo img { 
-        width: 60px !important; 
-        height: 60px !important; 
+    .logo img {
+        width: 60px !important;
+        height: 60px !important;
     }
 
-    nav { 
+    nav {
         flex-direction: column;
         padding: 1rem;
     }
 
-    nav ul { 
-        flex-direction: column; 
-        width: 100%; 
-        margin-top: 1rem; 
+    nav ul {
+        flex-direction: column;
+        width: 100%;
+        margin-top: 1rem;
         padding: 0;
         display: none;
     }
 
-    .menu-checkbox:checked ~ ul { 
-        display: flex; 
+    .menu-checkbox:checked ~ ul {
+        display: flex;
     }
 
-    nav ul li { 
-        margin: 0.5rem 0; 
+    nav ul li {
+        margin: 0.5rem 0;
     }
 
     .dropdown-menu {
@@ -672,10 +683,10 @@ footer a:hover { color: var(--white); }
     }
 
     /* Layouts de Grid */
-    .academy-list, .instructor-list, .weekly-calendar, .graduation-content, .feature-grid { 
-        grid-template-columns: 1fr !important; 
+    .academy-list, .instructor-list, .weekly-calendar, .graduation-content, .feature-grid {
+        grid-template-columns: 1fr !important;
     }
-    
+
     h2 { font-size: 1.8rem; }
     .hero h1 { font-size: 2.8rem; }
     .hero { padding: 4rem 1rem; }
@@ -684,8 +695,8 @@ footer a:hover { color: var(--white); }
    ESTILOS DA PÁGINA DE DETALHES DA ACADEMIA
    ========================================================================== */
 .academy-main-container {
-    max-width: 1200px; 
-    margin: 0 auto; 
+    max-width: 1200px;
+    margin: 0 auto;
     padding: 20px;
 }
 
@@ -2514,69 +2525,122 @@ body:has(.register-main) {
    CORREÇÃO DO MODO CLARO (LIGHT MODE) E TROCA DE LOGO
    ===================================================================== */
 @media (prefers-color-scheme: light) {
-    
+
     /* Garantir que o fundo geral seja claro */
-    body { 
-        background-color: #f4f4f2 !important; 
+    body {
+        background-color: #f4f4f2 !important;
     }
-    
+
     /* Arrumando o Header: fundo branco, letras e ícones escuros */
     header {
         background-color: rgba(255, 255, 255, 0.98) !important;
         border-bottom: 2px solid #dddddd !important;
     }
-    
-    nav ul li a, .dropdown-toggle { 
-        color: #333333 !important; 
+
+    nav ul li a, .dropdown-toggle {
+        color: #333333 !important;
     }
-    
-    nav ul li a:hover { 
-        color: #d32f2f !important; 
-        background: rgba(0, 0, 0, 0.05) !important; 
+
+    nav ul li a:hover {
+        color: var(--gold) !important;
+        background: rgba(0, 0, 0, 0.05) !important;
     }
-    
+
     .dropdown-menu {
         background-color: rgba(255, 255, 255, 0.98) !important;
-        border-top: 2px solid #d32f2f !important;
+        border-top: 2px solid var(--gold) !important;
         box-shadow: 0 8px 32px rgba(0,0,0,0.1) !important;
     }
-    
-    .dropdown-menu li a { 
-        color: #333333 !important; 
+
+    .dropdown-menu li a {
+        color: #333333 !important;
     }
-    
-    .dropdown-menu li a:hover { 
-        background: rgba(211, 47, 47, 0.1) !important; 
-        color: #d32f2f !important; 
+
+    .dropdown-menu li a:hover {
+        background: rgba(184, 146, 20, 0.1) !important;
+        color: var(--gold) !important;
     }
 
     /* 3. TROCA DE LOGO PARA A VERSÃO CINZA/CLARA (SEM MEXER NO HTML) */
     .logo a img {
         content: url('FigthPubClaro.png') !important;
     }
-    
+
     /* 4. VOLTANDO OS TEXTOS INLINE PARA ESCURO NO MODO CLARO */
-    h1[style*="color: #111"], 
-    h2[style*="color: #111"], 
-    h3[style*="color: #111"], 
+    h1[style*="color: #111"],
+    h2[style*="color: #111"],
+    h3[style*="color: #111"],
     div[style*="color: #111"],
     span[style*="color: #111"] {
         color: #111111 !important;
     }
 
-    p[style*="color: #555"], 
-    p[style*="color: #666"], 
-    div[style*="color: #666"], 
+    p[style*="color: #555"],
+    p[style*="color: #666"],
+    div[style*="color: #666"],
     li[style*="color: #444"] {
         color: #555555 !important;
     }
 
     /* Voltando as caixas dos eventos para a cor clara original */
-    div[style*="background: #fff"], 
+    div[style*="background: #fff"],
     div[style*="background: #fdfdfd"],
     div[style*="background: #f9f9f9"],
     div[style*="background-color: #fff"] {
         background-color: #ffffff !important;
         border-color: #eeeeee !important;
     }
+
+    /* 5. FIXING INDEX (LANDING PAGE) COLORS FOR LIGHT MODE */
+    .fp-hero { background: #fcfbfa !important; }
+    .fp-hero-eyebrow { color: var(--gold) !important; }
+    .fp-hero h1 { color: #111111 !important; }
+    .fp-hero h1 span { color: var(--gold) !important; }
+    .fp-hero::before { background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(184, 146, 20, 0.18) 0%, transparent 70%), repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(0,0,0,0.015) 40px, rgba(0,0,0,0.015) 41px) !important; }
+    .fp-hero-sub { color: #666666 !important; }
+    .fp-btn-primary { background: var(--gold) !important; color: #fff !important; }
+    .fp-btn-primary:hover { background: var(--gold-light) !important; box-shadow: 0 8px 24px rgba(184, 146, 20, 0.4) !important; }
+    .fp-btn-ghost { color: #111111 !important; border-color: #111111 !important; }
+    .fp-btn-ghost:hover { border-color: var(--gold) !important; color: var(--gold) !important; }
+
+    .fp-features { background: #fcfbfa !important; }
+    .fp-features-title { color: #111111 !important; }
+    .fp-feature-card h3 { color: #111111 !important; }
+    .fp-feature-card::after { background: var(--gold) !important; }
+
+    .fp-preview { background: #fcfbfa !important; }
+    .fp-preview-title { color: #111111 !important; }
+    .fp-academy-card { background: #ffffff !important; border: 1px solid var(--card-border) !important; }
+    .fp-academy-card h3 { color: #111111 !important; }
+    .fp-academy-card::before { background: var(--gold) !important; }
+    .fp-academy-stat span { color: var(--gold) !important; }
+    .fp-lock-overlay { background: rgba(255, 255, 255, 0.9) !important; }
+    .fp-lock-overlay p { color: #111111 !important; }
+
+    .fp-cta { background: var(--gold) !important; }
+    .fp-cta h2 { color: #ffffff !important; }
+    .fp-cta p { color: rgba(255, 255, 255, 0.9) !important; }
+    .fp-cta-btn-main { background: #ffffff !important; color: var(--gold) !important; }
+    .fp-cta-btn-main:hover { background: #fcfbfa !important; }
+    .fp-cta-btn-ghost { border-color: #ffffff !important; color: #ffffff !important; }
+    .fp-cta-btn-ghost:hover { background: rgba(255, 255, 255, 0.1) !important; }
+
+    .fp-lock-overlay a { background: var(--gold) !important; color: #ffffff !important; }
+
+    .fp-how-section { background: #fcfbfa !important; }
+    .fp-how-eyebrow { color: var(--gold) !important; }
+    .fp-how-header h2 { color: #111111 !important; }
+    .fp-how-step h3 { color: #111111 !important; }
+    .fp-how-connector { background: linear-gradient(90deg, var(--gold), var(--gold-light)) !important; }
+    @media (max-width: 768px) {
+        .fp-how-connector { background: linear-gradient(180deg, var(--gold), var(--gold-light)) !important; }
+    }
+
+    .fp-manifesto { background: #ffffff !important; border-top-color: #e0ded9 !important; border-bottom-color: #e0ded9 !important; }
+    .fp-manifesto-quote-mark { color: var(--gold) !important; opacity: 0.2 !important; }
+    .fp-manifesto-text { color: #111111 !important; }
+    .fp-manifesto-author { color: var(--gold) !important; }
+    .fp-manifesto::before { background: linear-gradient(90deg, transparent, var(--gold), transparent) !important; }
+
+    .fp-stats-bar { background: var(--gold) !important; }
 }

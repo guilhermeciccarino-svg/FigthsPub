@@ -370,6 +370,24 @@ $stat_eventos   = $db->querySingle("SELECT COUNT(*) FROM events") ?: 0;
         .fp-cs-dot.active { background: #d32f2f; border-color: #d32f2f; transform: scale(1.3); }
 
         /* Mobile */
+        @media (prefers-color-scheme: light) {
+            .fp-carousel-section { background: #fcfbfa !important; }
+            .fp-carousel-header { background: #ffffff !important; border-bottom-color: #e0ded9 !important; }
+            .fp-carousel-header h2 { color: #111111 !important; }
+            .fp-carousel-header p { color: #555555 !important; }
+            .fp-cs-left { background: #ffffff !important; }
+            .fp-cs-right { background: #fcfbfa !important; }
+            .fp-cs-tag { color: var(--gold) !important; border-color: var(--gold) !important; }
+            .fp-cs-content h3 { color: #111111 !important; }
+            .fp-cs-content p { color: #555555 !important; }
+            .fp-cs-link { color: var(--gold) !important; }
+            .fp-cs-link::before { background: var(--gold) !important; }
+            .fp-cs-arrow { border-color: #111111 !important; color: #111111 !important; }
+            .fp-cs-arrow:hover { background: #111111 !important; color: #ffffff !important; }
+            .fp-cs-img-overlay { background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.45) 100%) !important; }
+            .fp-cs-dot.active { background: var(--gold) !important; border-color: var(--gold) !important; }
+        }
+
         @media (max-width: 768px) {
             .fp-carousel-wrapper { height: auto; max-height: none; }
             .fp-carousel-track { height: auto; }
