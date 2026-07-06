@@ -45,7 +45,13 @@ $result = $db->query($query);
             $count++;
         ?>
             <div class="instructor-card-pro">
-                <span class="instructor-icon">🥋</span>
+                <?php if (!empty($instructor['profile_image'])): ?>
+                    <div style="width: 100px; height: 100px; margin: 0 auto 1rem; border-radius: 50%; overflow: hidden; border: 3px solid #ff9800;">
+                        <img src="<?php echo htmlspecialchars($instructor['profile_image']); ?>" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                <?php else: ?>
+                    <span class="instructor-icon">🥋</span>
+                <?php endif; ?>
                 <h3><?php echo htmlspecialchars($instructor['name']); ?></h3>
                 <p class="academy-card-addr">📍 <?php echo htmlspecialchars($instructor['academy_name']); ?></p>
                 <p><?php echo nl2br(htmlspecialchars($instructor['bio'])); ?></p>

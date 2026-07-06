@@ -44,11 +44,21 @@ $result = $db->query($query);
         while ($event = $result->fetchArray(SQLITE3_ASSOC)):
             $has_events = true;
         ?>
-            <div class="event-card-dark">
-                <span class="event-tag"><?php echo htmlspecialchars($event['martial_art_type']); ?></span>
+            <div class="event-card-dark" style="display: flex; flex-direction: column;">
+                <?php if (!empty($event['profile_image']) && file_exists($event['profile_image'])): ?>
+                    <div style="height: 180px; overflow: hidden; border-radius: 8px 8px 0 0; margin: -1.5rem -1.5rem 1rem -1.5rem;">
+                        <img src="<?php echo htmlspecialchars($event['profile_image']); ?>" alt="Profile Image" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                <?php endif; ?>
+                <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 0.5rem;">
+                    <span class="event-tag"><?php echo htmlspecialchars($event['martial_art_type']); ?></span>
+                    <?php if (!empty($event['federation'])): ?>
+                        <span style="background: rgba(255, 255, 255, 0.1); color: #ccc; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.8rem;"><?php echo htmlspecialchars($event['federation']); ?></span>
+                    <?php endif; ?>
+                </div>
                 <h3><?php echo htmlspecialchars($event['name']); ?></h3>
-                <p class="event-desc"><?php echo htmlspecialchars($event['description']); ?></p>
-                <a href="event_details.php?id=<?php echo $event['id']; ?>" class="btn-card-details">Ver Detalhes do Torneio</a>
+                <p class="event-desc" style="flex-grow: 1;"><?php echo htmlspecialchars($event['description']); ?></p>
+                <a href="event_details.php?id=<?php echo $event['id']; ?>" class="btn-card-details" style="margin-top: auto;">Ver Detalhes do Torneio</a>
             </div>
         <?php endwhile; ?>
     </div>

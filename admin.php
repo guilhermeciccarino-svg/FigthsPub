@@ -30,16 +30,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // A. ADICIONAR ACADEMIA
     if (isset($_POST['add_academy'])) {
-        $stmt_ac = $db->prepare("INSERT INTO academies (name, address, description, num_students, num_titles) 
-                                 VALUES (:name, :address, :description, :num_students, :num_titles)");
+        $profile_image_path = null;
+        if (isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] === UPLOAD_ERR_OK) {
+            $ext = strtolower(pathinfo($_FILES['profile_image']['name'], PATHINFO_EXTENSION));
+            if (in_array($ext, ['jpg', 'jpeg', 'png', 'webp'])) {
+                $new_filename = uniqid('academy_') . '.' . $ext;
+                $upload_path = 'uploads/academies/' . $new_filename;
+                if (move_uploaded_file($_FILES['profile_image']['tmp_name'], $upload_path)) {
+                    $profile_image_path = $upload_path;
+                }
+            }
+        }
+
+        $stmt_ac = $db->prepare("INSERT INTO academies (name, address, description, num_students, num_titles, profile_image)
+                                 VALUES (:name, :address, :description, :num_students, :num_titles, :profile_image)");
         $stmt_ac->bindValue(':name', trim($_POST['name']), SQLITE3_TEXT);
         $stmt_ac->bindValue(':address', trim($_POST['address']), SQLITE3_TEXT);
         $stmt_ac->bindValue(':description', trim($_POST['description']), SQLITE3_TEXT);
         $stmt_ac->bindValue(':num_students', 0, SQLITE3_INTEGER);
         $stmt_ac->bindValue(':num_titles', (int)$_POST['num_titles'], SQLITE3_INTEGER);
+        $stmt_ac->bindValue(':profile_image', $profile_image_path, SQLITE3_TEXT);
         $stmt_ac->execute();
-    } 
-    
+    }
+
     // B. EXCLUIR ACADEMIA
     elseif (isset($_POST['delete_academy'])) {
         $id = (int)$_POST['academy_id'];
@@ -52,29 +65,42 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt_del3 = $db->prepare("DELETE FROM schedules WHERE academy_id = :id");
         $stmt_del3->bindValue(':id', $id, SQLITE3_INTEGER);
         $stmt_del3->execute();
-    } 
-    
+    }
+
     // C. ADICIONAR INSTRUTOR
     elseif (isset($_POST['add_instructor'])) {
         $instructor_name = $_POST['instructor_name'];
         $academy_id = (int)$_POST['academy_id'];
         $bio = $_POST['bio'];
-        
+
         $username = trim($_POST['username']);
         $email = trim($_POST['email']);
         $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
+        $profile_image_path = null;
+        if (isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] === UPLOAD_ERR_OK) {
+            $ext = strtolower(pathinfo($_FILES['profile_image']['name'], PATHINFO_EXTENSION));
+            if (in_array($ext, ['jpg', 'jpeg', 'png', 'webp'])) {
+                $new_filename = uniqid('instructor_') . '.' . $ext;
+                $upload_path = 'uploads/instructors/' . $new_filename;
+                if (move_uploaded_file($_FILES['profile_image']['tmp_name'], $upload_path)) {
+                    $profile_image_path = $upload_path;
+                }
+            }
+        }
+
         // Inicia a transação: ou salva tudo ou não salva nada
         $db->exec('BEGIN');
-        
+
         try {
             // 1. Inserir na tabela instructors
-            $stmt_inst = $db->prepare("INSERT INTO instructors (name, academy_id, bio) VALUES (:name, :academy_id, :bio)");
+            $stmt_inst = $db->prepare("INSERT INTO instructors (name, academy_id, bio, profile_image) VALUES (:name, :academy_id, :bio, :profile_image)");
             $stmt_inst->bindValue(':name', $instructor_name, SQLITE3_TEXT);
             $stmt_inst->bindValue(':academy_id', $academy_id, SQLITE3_INTEGER);
             $stmt_inst->bindValue(':bio', $bio, SQLITE3_TEXT);
+            $stmt_inst->bindValue(':profile_image', $profile_image_path, SQLITE3_TEXT);
             $stmt_inst->execute();
-            
+
             $instructor_id = $db->lastInsertRowID();
 
             // 2. Inserir na tabela users
@@ -84,18 +110,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $stmt_user->bindValue(':email', $email, SQLITE3_TEXT);
             $stmt_user->bindValue(':instructor_id', $instructor_id, SQLITE3_INTEGER);
             $stmt_user->execute();
-            
+
             // Sucesso! Confirma as alterações.
             $db->exec('COMMIT');
             $msg_sucesso = "Instrutor e login criados com sucesso!";
-            
+
         } catch (Exception $e) {
             // Se falhar (ex: username repetido), cancela tudo para não deixar dados pela metade
             $db->exec('ROLLBACK');
             $msg_erro = "Erro ao criar instrutor: Já existe um utilizador com esse Username ou Email.";
         }
     }
-    
+
     // D. EXCLUIR INSTRUTOR
     elseif (isset($_POST['delete_instructor'])) {
         $id = (int)$_POST['instructor_id'];
@@ -108,8 +134,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt_di3 = $db->prepare("DELETE FROM schedules WHERE instructor_id = :id");
         $stmt_di3->bindValue(':id', $id, SQLITE3_INTEGER);
         $stmt_di3->execute();
-    } 
-    
+    }
+
     // E. EXCLUIR HORÁRIO
     elseif (isset($_POST['delete_schedule'])) {
         $id = (int)$_POST['schedule_id'];
@@ -120,14 +146,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // F. ADICIONAR EVENTO / CAMPEONATO
     elseif (isset($_POST['add_event'])) {
-        $stmt_ev = $db->prepare("INSERT INTO events (name, martial_art_type, description, rules, weight_classes, belt_ranks) 
-                                 VALUES (:name, :martial_art_type, :description, :rules, :weight_classes, :belt_ranks)");
+        $profile_image_path = null;
+        if (isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] === UPLOAD_ERR_OK) {
+            $ext = strtolower(pathinfo($_FILES['profile_image']['name'], PATHINFO_EXTENSION));
+            if (in_array($ext, ['jpg', 'jpeg', 'png', 'webp'])) {
+                $new_filename = uniqid('event_') . '.' . $ext;
+                $upload_path = 'uploads/events/' . $new_filename;
+                if (move_uploaded_file($_FILES['profile_image']['tmp_name'], $upload_path)) {
+                    $profile_image_path = $upload_path;
+                }
+            }
+        }
+
+        $stmt_ev = $db->prepare("INSERT INTO events (name, martial_art_type, description, rules, weight_classes, belt_ranks, profile_image, federation, age_classes)
+                                 VALUES (:name, :martial_art_type, :description, :rules, :weight_classes, :belt_ranks, :profile_image, :federation, :age_classes)");
         $stmt_ev->bindValue(':name', trim($_POST['event_name']), SQLITE3_TEXT);
         $stmt_ev->bindValue(':martial_art_type', trim($_POST['martial_art_type']), SQLITE3_TEXT);
         $stmt_ev->bindValue(':description', trim($_POST['event_description']), SQLITE3_TEXT);
         $stmt_ev->bindValue(':rules', trim($_POST['rules']), SQLITE3_TEXT);
         $stmt_ev->bindValue(':weight_classes', trim($_POST['weight_classes']), SQLITE3_TEXT);
         $stmt_ev->bindValue(':belt_ranks', trim($_POST['belt_ranks']), SQLITE3_TEXT);
+        $stmt_ev->bindValue(':profile_image', $profile_image_path, SQLITE3_TEXT);
+        $stmt_ev->bindValue(':federation', trim($_POST['federation'] ?? ''), SQLITE3_TEXT);
+        $stmt_ev->bindValue(':age_classes', trim($_POST['age_classes'] ?? ''), SQLITE3_TEXT);
         $stmt_ev->execute();
     }
 
@@ -152,9 +193,13 @@ $events = $db->query("SELECT * FROM events ORDER BY id DESC");
 
     <div class="admin-section section-events" style="border-top: 5px solid #ff9800;">
         <h2>Gerenciar Eventos / Campeonatos 🏆</h2>
-        
+
         <h3>Cadastrar Novo Torneio</h3>
-        <form method="POST" class="admin-form-inner">
+        <form method="POST" class="admin-form-inner" enctype="multipart/form-data">
+            <div class="form-group">
+                <label>Pôster / Imagem de Perfil do Evento:</label>
+                <input type="file" name="profile_image" accept="image/*">
+            </div>
             <div class="form-group">
                 <label>Nome do Evento:</label>
                 <input type="text" name="event_name" placeholder="Ex: ADCC 2026, Campeonato Nacional de Karaté..." required>
@@ -162,6 +207,10 @@ $events = $db->query("SELECT * FROM events ORDER BY id DESC");
             <div class="form-group">
                 <label>Estilo de Luta:</label>
                 <input type="text" name="martial_art_type" placeholder="Ex: Jiu-Jitsu Brasileiro (BJJ), Muay Thai..." required>
+            </div>
+            <div class="form-group">
+                <label>Federação Responsável (Opcional):</label>
+                <input type="text" name="federation" placeholder="Ex: IBJJF, FPJJ, etc...">
             </div>
             <div class="form-group">
                 <label>Descrição (O que é o evento?):</label>
@@ -175,7 +224,7 @@ $events = $db->query("SELECT * FROM events ORDER BY id DESC");
                 <label>Regras do Torneio:</label>
                 <textarea name="rules" rows="5" placeholder="Proibido chaves de calcanhar&#10;Lutas de 10 minutos&#10;Pontuação por finalização..."></textarea>
             </div>
-            
+
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
                 <div class="form-group">
                     <label>Categorias de Peso:</label>
@@ -184,6 +233,10 @@ $events = $db->query("SELECT * FROM events ORDER BY id DESC");
                 <div class="form-group">
                     <label>Graduações Permitidas:</label>
                     <textarea name="belt_ranks" rows="5" placeholder="Faixa Azul&#10;Faixa Roxa&#10;Faixa Marrom&#10;Faixa Preta"></textarea>
+                </div>
+                <div class="form-group" style="grid-column: 1 / -1;">
+                    <label>Classes de Idade:</label>
+                    <textarea name="age_classes" rows="4" placeholder="Juvenil (16-17)&#10;Adulto (18-29)&#10;Master 1 (30+)"></textarea>
                 </div>
             </div>
 
@@ -219,9 +272,13 @@ $events = $db->query("SELECT * FROM events ORDER BY id DESC");
     </div>
     <div class="admin-section section-academies">
         <h2>Gerenciar Academias</h2>
-        
+
         <h3>Adicionar Nova Academia</h3>
-        <form method="POST" class="admin-form-inner">
+        <form method="POST" class="admin-form-inner" enctype="multipart/form-data">
+            <div class="form-group">
+                <label>Imagem de Perfil / Logotipo:</label>
+                <input type="file" name="profile_image" accept="image/*">
+            </div>
             <div class="form-group">
                 <label>Nome:</label>
                 <input type="text" name="name" required>
@@ -273,14 +330,18 @@ $events = $db->query("SELECT * FROM events ORDER BY id DESC");
 
     <div class="admin-section section-instructors">
         <h2>Gerenciar Instrutores</h2>
-        
+
         <h3>Cadastrar Instrutor e Login</h3>
-        <form method="POST" class="admin-form-inner">
+        <form method="POST" class="admin-form-inner" enctype="multipart/form-data">
+            <div class="form-group">
+                <label>Foto de Perfil:</label>
+                <input type="file" name="profile_image" accept="image/*">
+            </div>
             <div class="form-group">
                 <label>Nome do Instrutor:</label>
                 <input type="text" name="instructor_name" required>
             </div>
-            
+
             <div class="form-group">
                 <label>Vincular à Academia:</label>
                 <select name="academy_id" required>
@@ -292,21 +353,21 @@ $events = $db->query("SELECT * FROM events ORDER BY id DESC");
                     <?php endwhile; ?>
                 </select>
             </div>
-            
+
             <div class="form-group">
                 <label>Biografia:</label>
                 <textarea name="bio" required></textarea>
             </div>
 
             <hr style="border: 0; border-top: 1px solid #333; margin: 1.5rem 0;">
-            
+
             <h4 style="margin-bottom: 1rem; color: #fff;">Dados de Acesso (Login)</h4>
             <div class="form-grid-3">
                 <input type="text" name="username" placeholder="Usuário" required>
                 <input type="email" name="email" placeholder="Email" required>
                 <input type="password" name="password" placeholder="Senha" required>
             </div>
-            
+
             <button type="submit" name="add_instructor" class="btn-admin btn-admin-alt">Criar Instrutor</button>
         </form>
 
@@ -323,9 +384,9 @@ $events = $db->query("SELECT * FROM events ORDER BY id DESC");
                 </thead>
                 <tbody>
                     <?php
-                    $instructors = $db->query("SELECT instructors.*, academies.name as academy_name, users.email 
-                                               FROM instructors 
-                                               LEFT JOIN academies ON instructors.academy_id = academies.id 
+                    $instructors = $db->query("SELECT instructors.*, academies.name as academy_name, users.email
+                                               FROM instructors
+                                               LEFT JOIN academies ON instructors.academy_id = academies.id
                                                LEFT JOIN users ON users.instructor_id = instructors.id
                                                ORDER BY instructors.name");
                     while ($inst = $instructors->fetchArray(SQLITE3_ASSOC)): ?>
@@ -363,9 +424,9 @@ $events = $db->query("SELECT * FROM events ORDER BY id DESC");
                 </thead>
                 <tbody>
                     <?php
-                    $schedules = $db->query("SELECT schedules.*, academies.name as academy_name, instructors.name as instructor_name 
-                                             FROM schedules 
-                                             JOIN academies ON schedules.academy_id = academies.id 
+                    $schedules = $db->query("SELECT schedules.*, academies.name as academy_name, instructors.name as instructor_name
+                                             FROM schedules
+                                             JOIN academies ON schedules.academy_id = academies.id
                                              LEFT JOIN instructors ON schedules.instructor_id = instructors.id
                                              ORDER BY schedules.day, schedules.time");
                     while ($sch = $schedules->fetchArray(SQLITE3_ASSOC)): ?>

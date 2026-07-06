@@ -125,19 +125,43 @@ include 'header.php';
 <main class="academy-main-container">
 
     <!-- HERO DA ACADEMIA -->
-    <div class="academy-hero">
-        <div class="academy-hero-meta">
-            <?php if ($total_reviews > 0): ?>
-            <span class="academy-hero-rating">
-                <?php echo renderStars($avg_rating); ?>
-                <strong><?php echo number_format($avg_rating, 1); ?></strong>
-                <span>(<?php echo $total_reviews; ?> avaliações)</span>
-            </span>
-            <?php endif; ?>
+    <div class="academy-hero" style="position: relative; overflow: hidden; <?php if(!empty($academy['profile_image'])) echo 'padding: 4rem 2rem;'; ?>">
+        <?php if(!empty($academy['profile_image'])): ?>
+            <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: 0;">
+                <img src="<?php echo htmlspecialchars($academy['profile_image']); ?>" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.3;">
+            </div>
+        <?php endif; ?>
+        <div style="position: relative; z-index: 1;">
+            <div class="academy-hero-meta">
+                <?php if ($total_reviews > 0): ?>
+                <span class="academy-hero-rating">
+                    <?php echo renderStars($avg_rating); ?>
+                    <strong><?php echo number_format($avg_rating, 1); ?></strong>
+                    <span>(<?php echo $total_reviews; ?> avaliações)</span>
+                </span>
+                <?php endif; ?>
+            </div>
+            <h1 style="text-shadow: 2px 2px 4px rgba(0,0,0,0.8);"><?php echo htmlspecialchars($academy['name']); ?></h1>
+            <div class="address">📍 <?php echo htmlspecialchars($academy['address']); ?></div>
+            <div class="description"><?php echo nl2br(htmlspecialchars($academy['description'])); ?></div>
         </div>
-        <h1><?php echo htmlspecialchars($academy['name']); ?></h1>
-        <div class="address">📍 <?php echo htmlspecialchars($academy['address']); ?></div>
-        <div class="description"><?php echo nl2br(htmlspecialchars($academy['description'])); ?></div>
+    </div>
+
+    <!-- MAPA -->
+    <div style="margin: 2rem 0; border-radius: 8px; overflow: hidden; border: 1px solid #333; height: 350px;">
+        <?php
+        $encoded_address = urlencode($academy['name'] . ' ' . $academy['address']);
+        ?>
+        <iframe
+            width="100%"
+            height="100%"
+            frameborder="0" style="border:0"
+            referrerpolicy="no-referrer"
+            src="https://www.google.com/maps/embed/v1/place?key=REPLACE_WITH_API_KEY&q=<?php echo $encoded_address; ?>"
+            allowfullscreen>
+        </iframe>
+        <!-- Since we don't have a real API key, fallback to a simpler embedded map using openstreetmap/google iframe without api key -->
+        <iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?q=<?php echo $encoded_address; ?>&t=&z=15&ie=UTF8&iwloc=&output=embed" style="position: relative; z-index: 2; margin-top: -350px;"></iframe>
     </div>
 
     <!-- INSTRUTORES -->
@@ -149,7 +173,13 @@ include 'header.php';
             $has_instructors = true;
         ?>
         <div class="instructor-card-pro">
-            <span class="instructor-icon">🥋</span>
+            <?php if (!empty($inst['profile_image'])): ?>
+                <div style="width: 80px; height: 80px; margin: 0 auto 1rem; border-radius: 50%; overflow: hidden; border: 2px solid #ff9800;">
+                    <img src="<?php echo htmlspecialchars($inst['profile_image']); ?>" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+            <?php else: ?>
+                <span class="instructor-icon">🥋</span>
+            <?php endif; ?>
             <h3><?php echo htmlspecialchars($inst['name']); ?></h3>
             <p><?php echo htmlspecialchars($inst['bio']); ?></p>
         </div>

@@ -11,7 +11,7 @@ if (isset($_SESSION['user_id']) && $_SESSION['role'] == 'user') {
     try {
         // Abre uma ligação temporária apenas para ler as notificações
         $db_header = new SQLite3('academies.db');
-        $stmt_notif = $db_header->prepare("SELECT id, message FROM notifications WHERE user_id = :uid AND status = 'pending' AND type = 'invite'");
+        $stmt_notif = $db_header->prepare("SELECT id, type, message FROM notifications WHERE user_id = :uid AND status = 'pending' ORDER BY created_at DESC");
         $stmt_notif->bindValue(':uid', $_SESSION['user_id'], SQLITE3_INTEGER);
         $res_notif = $stmt_notif->execute();
         
@@ -55,20 +55,44 @@ if (isset($_SESSION['user_id']) && $_SESSION['role'] == 'user') {
                                 <?php endif; ?>
                             </a>
                             
-                            <?php if($pending_count > 0): ?>
-                                <div class="notifications-dropdown" style="display: none;">
-                                    <div style="font-weight: bold; padding-bottom: 5px; border-bottom: 1px solid #ccc; color:#111; text-align: left;">Novos Convites</div>
-                                    <?php foreach($notifs as $n): ?>
-                                        <div class="notif-item">
-                                            <p style="margin: 0;"><?php echo htmlspecialchars($n['message']); ?></p>
-                                            <div class="notif-actions">
-                                                <a href="process_invite.php?action=accept&id=<?php echo $n['id']; ?>" class="btn-accept">Aceitar</a>
-                                                <a href="process_invite.php?action=reject&id=<?php echo $n['id']; ?>" class="btn-reject">Recusar</a>
+                            <div class="notifications-dropdown" style="display: none; width: 300px;">
+                                <div class="notifications-header" style="font-weight: bold; padding-bottom: 5px; border-bottom: 1px solid #ccc; color:#111; text-align: left; margin-bottom: 10px;">Notificações</div>
+                                <?php if($pending_count > 0): ?>
+                                    <div class="notifications-list" style="max-height: 300px; overflow-y: auto;">
+                                        <?php foreach($notifs as $n): ?>
+                                            <div class="notif-item type-<?php echo htmlspecialchars($n['type']); ?>" style="padding: 10px; border-bottom: 1px solid #eee; text-align: left;">
+                                                <div class="notif-content" style="display: flex; gap: 8px; margin-bottom: 5px;">
+                                                    <?php if($n['type'] == 'invite'): ?>
+                                                        <span class="notif-icon">🤝</span>
+                                                    <?php elseif($n['type'] == 'alert'): ?>
+                                                        <span class="notif-icon">⚠️</span>
+                                                    <?php elseif($n['type'] == 'graduation'): ?>
+                                                        <span class="notif-icon">🥋</span>
+                                                    <?php else: ?>
+                                                        <span class="notif-icon">ℹ️</span>
+                                                    <?php endif; ?>
+                                                    <p style="margin: 0; font-size: 0.9rem; color: #333;"><?php echo htmlspecialchars($n['message']); ?></p>
+                                                </div>
+
+                                                <?php if($n['type'] == 'invite'): ?>
+                                                    <div class="notif-actions" style="display: flex; gap: 5px; margin-top: 5px; justify-content: flex-end;">
+                                                        <a href="process_invite.php?action=accept&id=<?php echo $n['id']; ?>" class="btn-accept" style="font-size: 0.8rem; padding: 2px 8px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 3px;">Aceitar</a>
+                                                        <a href="process_invite.php?action=reject&id=<?php echo $n['id']; ?>" class="btn-reject" style="font-size: 0.8rem; padding: 2px 8px; background-color: #f44336; color: white; text-decoration: none; border-radius: 3px;">Recusar</a>
+                                                    </div>
+                                                <?php else: ?>
+                                                    <div class="notif-actions" style="display: flex; gap: 5px; margin-top: 5px; justify-content: flex-end;">
+                                                        <a href="process_notif.php?action=read&id=<?php echo $n['id']; ?>" class="btn-read" style="font-size: 0.8rem; padding: 2px 8px; background: #eee; color: #333; text-decoration: none; border-radius: 3px; border: 1px solid #ccc;">Marcar lida</a>
+                                                    </div>
+                                                <?php endif; ?>
                                             </div>
-                                        </div>
-                                    <?php endforeach; ?>
-                                </div>
-                            <?php endif; ?>
+                                        <?php endforeach; ?>
+                                    </div>
+                                <?php else: ?>
+                                    <div class="notif-empty" style="padding: 10px; color: #666; text-align: center; font-size: 0.9rem;">
+                                        Nenhuma notificação nova.
+                                    </div>
+                                <?php endif; ?>
+                            </div>
                         </li>
                     <?php endif; ?>
 <li><a href="index.php">Início</a></li>

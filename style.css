@@ -2580,3 +2580,140 @@ body:has(.register-main) {
         border-color: #eeeeee !important;
     }
 }
+/* ====== ENHANCED NOTIFICATIONS AND FEEDBACK ====== */
+
+.fp-alert {
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    border-radius: 6px;
+    font-weight: 500;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    animation: slideIn 0.3s ease-out forwards;
+}
+
+.fp-alert-success {
+    background-color: rgba(76, 175, 80, 0.15);
+    color: #4CAF50;
+    border: 1px solid #4CAF50;
+}
+
+.fp-alert-error {
+    background-color: rgba(244, 67, 54, 0.15);
+    color: #f44336;
+    border: 1px solid #f44336;
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Enhanced Form Validations */
+input:invalid:not(:focus):not(:placeholder-shown),
+textarea:invalid:not(:focus):not(:placeholder-shown),
+select:invalid:not(:focus):not(:placeholder-shown) {
+    border-color: #f44336;
+    background-color: rgba(244, 67, 54, 0.05);
+}
+
+/* Enhanced Notifications Dropdown */
+.notifications-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    width: 320px;
+    z-index: 1000;
+    overflow: hidden;
+    border: 1px solid #eee;
+}
+
+.notifications-header {
+    background: #f8f9fa;
+    padding: 12px 15px;
+    font-weight: bold;
+    color: #333;
+    border-bottom: 1px solid #eee;
+    margin: 0 !important;
+}
+
+.notifications-list {
+    max-height: 350px;
+    overflow-y: auto;
+}
+
+.notif-item {
+    padding: 12px 15px;
+    border-bottom: 1px solid #f1f1f1;
+    transition: background-color 0.2s;
+}
+
+.notif-item:hover {
+    background-color: #f8f9fa;
+}
+
+.notif-content {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+}
+
+.notif-icon {
+    font-size: 1.2rem;
+    line-height: 1;
+}
+
+.notif-item p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #444;
+    line-height: 1.4;
+}
+
+.notif-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+    justify-content: flex-end;
+}
+
+.btn-read {
+    font-size: 0.75rem;
+    padding: 4px 10px;
+    background: #e9ecef;
+    color: #495057;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.btn-read:hover {
+    background: #dee2e6;
+    color: #212529;
+}
+
+.btn-accept, .btn-reject {
+    font-size: 0.75rem;
+    padding: 4px 10px;
+    border-radius: 4px;
+    color: white;
+    text-decoration: none;
+}
+
+.btn-accept { background-color: #4CAF50; }
+.btn-accept:hover { background-color: #45a049; }
+.btn-reject { background-color: #f44336; }
+.btn-reject:hover { background-color: #da190b; }
+
+.bell-icon-emoji {
+    font-size: 1.4rem;
+}
+
+/* Event Gallery Review Stars */
+.gallery-review-stars {
+    color: #ff9800;
+    font-size: 1.2rem;
+}
