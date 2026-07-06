@@ -57,20 +57,20 @@ function formatar_lista($texto_do_banco) {
     </div>
 
     <div class="event-detail-body">
-        <h2>📖 Sobre o Torneio</h2>
+        <h2> Sobre o Torneio</h2>
         <p><?php echo nl2br(htmlspecialchars($event['description'])); ?></p>
     </div>
 
     <div class="event-info-grid">
 
         <div class="event-info-card">
-            <h3><span>⚖️</span> Livro de Regras</h3>
+            <h3><span>️</span> Livro de Regras</h3>
             <hr>
             <?php echo formatar_lista($event['rules']); ?>
         </div>
 
         <div class="event-info-card">
-            <h3><span>⚖️</span> Tabela de Pesos</h3>
+            <h3><span>️</span> Tabela de Pesos</h3>
             <hr>
             <?php echo formatar_lista($event['weight_classes']); ?>
         </div>

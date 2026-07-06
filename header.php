@@ -14,7 +14,7 @@ if (isset($_SESSION['user_id']) && $_SESSION['role'] == 'user') {
         $stmt_notif = $db_header->prepare("SELECT id, message FROM notifications WHERE user_id = :uid AND status = 'pending' AND type = 'invite'");
         $stmt_notif->bindValue(':uid', $_SESSION['user_id'], SQLITE3_INTEGER);
         $res_notif = $stmt_notif->execute();
-        
+
         while($row = $res_notif->fetchArray(SQLITE3_ASSOC)) {
             $notifs[] = $row;
         }
@@ -32,7 +32,14 @@ if (isset($_SESSION['user_id']) && $_SESSION['role'] == 'user') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fight Pub</title>
     <link rel="icon" type="image/png" href="Figth.png">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" id="theme-stylesheet" href="style.css">
+    <script>
+        // Check local storage for theme preference immediately to prevent flash
+        const savedTheme = localStorage.getItem('fightpub_theme');
+        if (savedTheme === 'minimal') {
+            document.getElementById('theme-stylesheet').href = 'style-minimal.css';
+        }
+    </script>
 </head>
 <body>
     <header>
@@ -45,16 +52,24 @@ if (isset($_SESSION['user_id']) && $_SESSION['role'] == 'user') {
             <input type="checkbox" id="menu-toggle" class="menu-checkbox">
             <label for="menu-toggle" class="menu-icon">&#9776;</label>
             <ul>
+                <li>
+                    <button id="theme-toggle-btn" style="background: #333; border: 1px solid #555; color: #fff; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-size: 0.8rem; margin-right: 10px;">
+                        Alternar Design
+                    </button>
+                </li>
                 <?php if(isset($_SESSION['user_id'])): ?>
                     <?php if($_SESSION['role'] == 'user'): ?>
                         <li class="nav-notifications">
                             <a href="#" class="bell-icon">
-                                🔔
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle;">
+                                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                                    <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                                </svg>
                                 <?php if($pending_count > 0): ?>
                                     <span class="notification-badge"><?php echo $pending_count; ?></span>
                                 <?php endif; ?>
                             </a>
-                            
+
                             <?php if($pending_count > 0): ?>
                                 <div class="notifications-dropdown" style="display: none;">
                                     <div style="font-weight: bold; padding-bottom: 5px; border-bottom: 1px solid #ccc; color:#111; text-align: left;">Novos Convites</div>
@@ -85,7 +100,7 @@ if (isset($_SESSION['user_id']) && $_SESSION['role'] == 'user') {
                             </ul>
                         </li>
                     <?php endif; ?>
-                    
+
                     <?php if($_SESSION['role'] == 'admin'): ?>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle">Admin <span class="arrow">▼</span></a>
@@ -106,7 +121,7 @@ if (isset($_SESSION['user_id']) && $_SESSION['role'] == 'user') {
                             </ul>
                         </li>
                     <?php endif; ?>
-                    
+
                     <li><a href="logout.php">Sair</a></li>
                 <?php endif; ?>
                 <?php else: ?>
@@ -192,6 +207,23 @@ if (isset($_SESSION['user_id']) && $_SESSION['role'] == 'user') {
                 menuToggle.addEventListener('change', function() {
                     const dropdowns = document.querySelectorAll('.dropdown-menu');
                     dropdowns.forEach(dd => dd.style.display = 'none');
+                });
+            }
+
+            // Theme Toggle Logic
+            const themeBtn = document.getElementById('theme-toggle-btn');
+            const themeStylesheet = document.getElementById('theme-stylesheet');
+
+            if (themeBtn && themeStylesheet) {
+                themeBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    if (themeStylesheet.href.includes('style-minimal.css')) {
+                        themeStylesheet.href = 'style.css';
+                        localStorage.setItem('fightpub_theme', 'classic');
+                    } else {
+                        themeStylesheet.href = 'style-minimal.css';
+                        localStorage.setItem('fightpub_theme', 'minimal');
+                    }
                 });
             }
         });
