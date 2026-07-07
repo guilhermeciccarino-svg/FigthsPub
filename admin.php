@@ -138,18 +138,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt_dev->bindValue(':id', $id, SQLITE3_INTEGER);
         $stmt_dev->execute();
     }
+
     // H. EXCLUIR USUARIO (ATLETA)
-
     elseif (isset($_POST['delete_user'])) {
-
         $id = (int)$_POST['user_id'];
-
         $stmt_du = $db->prepare("DELETE FROM users WHERE id = :id AND role = 'user'");
-
-        $stmt_du->bindValue('id', $id, SQLITE3_INTEGER);
-
+        $stmt_du->bindValue(':id', $id, SQLITE3_INTEGER);
         $stmt_du->execute();
-
     }
 }
 
@@ -231,6 +226,7 @@ $users = $db->query("SELECT * FROM users WHERE role = 'user' ORDER BY username")
             </table>
         </div>
     </div>
+    
     <div class="admin-section section-academies">
         <h2>Gerenciar Academias</h2>
 
@@ -286,65 +282,35 @@ $users = $db->query("SELECT * FROM users WHERE role = 'user' ORDER BY username")
     </div>
 
     <div class="admin-section section-users" style="border-top: 5px solid #ff9800;">
-
         <h2>Gerenciar Atletas (Usuários)</h2>
 
-
-
         <h3>Lista de Atletas</h3>
-
         <div style="overflow-x: auto;">
-
             <table class="table">
-
                 <thead>
-
                     <tr>
-
                         <th>Nome de Usuário</th>
-
                         <th>Email</th>
-
                         <th>Ações</th>
-
                     </tr>
-
                 </thead>
-
                 <tbody>
-
                     <?php while ($user = $users->fetchArray(SQLITE3_ASSOC)): ?>
-
                         <tr>
-
                             <td><?php echo htmlspecialchars($user['username']); ?></td>
-
                             <td><?php echo htmlspecialchars($user['email']); ?></td>
-
                             <td>
-
                                 <form method="POST" class="form-inline">
-
                                     <input type="hidden" name="user_id" value="<?php echo $user['id']; ?>">
-
                                     <button type="submit" name="delete_user" class="btn-text-danger" onclick="return confirm('Tem certeza que deseja excluir este usuário definitivamente?')">Excluir</button>
-
                                 </form>
-
                             </td>
-
                         </tr>
-
                     <?php endwhile; ?>
-
                 </tbody>
-
             </table>
-
         </div>
-
     </div>
-
 
     <div class="admin-section section-instructors">
         <h2>Gerenciar Instrutores</h2>
