@@ -10,9 +10,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
 
 $db = new SQLite3('academies.db');
 
-// ===================================================================
 // CRIA A TABELA DE EVENTOS AUTOMATICAMENTE (Se não existir)
-// ===================================================================
 $query_create_events = "CREATE TABLE IF NOT EXISTS events (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
@@ -23,7 +21,6 @@ $query_create_events = "CREATE TABLE IF NOT EXISTS events (
     belt_ranks TEXT
 )";
 $db->exec($query_create_events);
-// ===================================================================
 
 // --- PROCESSAMENTO DE FORMULÁRIOS (POST) ---
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {

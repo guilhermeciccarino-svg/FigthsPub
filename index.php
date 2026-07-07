@@ -599,7 +599,7 @@ $user_avatar = $user_data['avatar'] ?? null;
                 ?>
                 </p>
             </div>
-        </div>
+    </div>
         <span class="dash-welcome-badge <?php echo $badge_class; ?>"><?php echo $badge_label; ?></span>
     </div>
 
