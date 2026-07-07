@@ -26,14 +26,14 @@ $result = $db->query($query);
 <main>
     <div class="page-hero-bar" style="margin: -3rem -2rem 3rem;">
         <div class="page-hero-bar-inner">
-            <h1>🥋 Nossos Mestres</h1>
+            <h1>Nossos Mestres</h1>
             <p>Conheça a elite de instrutores que vai forjar o seu caminho no tatame.</p>
             <form class="fp-search-form" method="GET">
                 <input type="text" name="search" placeholder="Buscar por nome ou estilo de luta..." value="<?php echo htmlspecialchars($search); ?>">
-                <button type="submit">🔍 Buscar</button>
+                <button type="submit"> Buscar</button>
             </form>
             <?php if (!empty($search)): ?>
-            <a href="instructors.php" class="clear-search">✖ Limpar pesquisa</a>
+            <a href="instructors.php" class="clear-search">X Limpar pesquisa</a>
             <?php endif; ?>
         </div>
     </div>
@@ -47,7 +47,7 @@ $result = $db->query($query);
             <div class="instructor-card-pro">
                 <span class="instructor-icon">🥋</span>
                 <h3><?php echo htmlspecialchars($instructor['name']); ?></h3>
-                <p class="academy-card-addr">📍 <?php echo htmlspecialchars($instructor['academy_name']); ?></p>
+                <p class="academy-card-addr"> <?php echo htmlspecialchars($instructor['academy_name']); ?></p>
                 <p><?php echo nl2br(htmlspecialchars($instructor['bio'])); ?></p>
             </div>
         <?php endwhile; ?>

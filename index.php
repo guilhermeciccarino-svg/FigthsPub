@@ -79,7 +79,7 @@ $stat_eventos   = $db->querySingle("SELECT COUNT(*) FROM events") ?: 0;
                         <div class="fp-cs-img-overlay"></div>
                     </div>
                     <div class="fp-cs-content fp-cs-right">
-                        <span class="fp-cs-icon">🏟️</span>
+                        <span class="fp-cs-icon">️</span>
                         <span class="fp-cs-tag">01 / 06</span>
                         <h3>Academias</h3>
                         <p>Consulta as academias filiadas, os seus instrutores e a grade completa de aulas semanais. Encontra o teu dojo perfeito.</p>
@@ -109,7 +109,7 @@ $stat_eventos   = $db->querySingle("SELECT COUNT(*) FROM events") ?: 0;
                         <div class="fp-cs-img-overlay"></div>
                     </div>
                     <div class="fp-cs-content fp-cs-right">
-                        <span class="fp-cs-icon">📋</span>
+                        <span class="fp-cs-icon"></span>
                         <span class="fp-cs-tag">03 / 06</span>
                         <h3>Presenças</h3>
                         <p>Controlo de assiduidade por aula, com histórico completo para cada atleta. O instrutor faz a chamada e o registo fica guardado.</p>
@@ -120,7 +120,7 @@ $stat_eventos   = $db->querySingle("SELECT COUNT(*) FROM events") ?: 0;
                 <!-- SLIDE 4 — texto esquerda, imagem direita -->
                 <div class="fp-carousel-slide fp-slide-reverse">
                     <div class="fp-cs-content fp-cs-left">
-                        <span class="fp-cs-icon">🏆</span>
+                        <span class="fp-cs-icon"></span>
                         <span class="fp-cs-tag">04 / 06</span>
                         <h3>Eventos</h3>
                         <p>Calendário de torneios e campeonatos com regras detalhadas, categorias de peso e graduações permitidas. Prepara-te para competir.</p>
@@ -139,7 +139,7 @@ $stat_eventos   = $db->querySingle("SELECT COUNT(*) FROM events") ?: 0;
                         <div class="fp-cs-img-overlay"></div>
                     </div>
                     <div class="fp-cs-content fp-cs-right">
-                        <span class="fp-cs-icon">🔔</span>
+                        <span class="fp-cs-icon"></span>
                         <span class="fp-cs-tag">05 / 06</span>
                         <h3>Convites</h3>
                         <p>Sistema de convites seguro — o instrutor valida o Cartão de Cidadão do atleta antes de o admitir na academia.</p>
@@ -150,7 +150,7 @@ $stat_eventos   = $db->querySingle("SELECT COUNT(*) FROM events") ?: 0;
                 <!-- SLIDE 6 — texto esquerda, imagem direita -->
                 <div class="fp-carousel-slide fp-slide-reverse">
                     <div class="fp-cs-content fp-cs-left">
-                        <span class="fp-cs-icon">👤</span>
+                        <span class="fp-cs-icon"></span>
                         <span class="fp-cs-tag">06 / 06</span>
                         <h3>Perfil Pessoal</h3>
                         <p>Cada atleta tem o seu perfil com dados pessoais, foto de perfil, histórico completo de treinos e todas as graduações obtidas.</p>
@@ -370,24 +370,6 @@ $stat_eventos   = $db->querySingle("SELECT COUNT(*) FROM events") ?: 0;
         .fp-cs-dot.active { background: #d32f2f; border-color: #d32f2f; transform: scale(1.3); }
 
         /* Mobile */
-        @media (prefers-color-scheme: light) {
-            .fp-carousel-section { background: #fcfbfa !important; }
-            .fp-carousel-header { background: #ffffff !important; border-bottom-color: #e0ded9 !important; }
-            .fp-carousel-header h2 { color: #111111 !important; }
-            .fp-carousel-header p { color: #555555 !important; }
-            .fp-cs-left { background: #ffffff !important; }
-            .fp-cs-right { background: #fcfbfa !important; }
-            .fp-cs-tag { color: var(--gold) !important; border-color: var(--gold) !important; }
-            .fp-cs-content h3 { color: #111111 !important; }
-            .fp-cs-content p { color: #555555 !important; }
-            .fp-cs-link { color: var(--gold) !important; }
-            .fp-cs-link::before { background: var(--gold) !important; }
-            .fp-cs-arrow { border-color: #111111 !important; color: #111111 !important; }
-            .fp-cs-arrow:hover { background: #111111 !important; color: #ffffff !important; }
-            .fp-cs-img-overlay { background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.45) 100%) !important; }
-            .fp-cs-dot.active { background: var(--gold) !important; border-color: var(--gold) !important; }
-        }
-
         @media (max-width: 768px) {
             .fp-carousel-wrapper { height: auto; max-height: none; }
             .fp-carousel-track { height: auto; }
@@ -406,7 +388,32 @@ $stat_eventos   = $db->querySingle("SELECT COUNT(*) FROM events") ?: 0;
             .fp-cs-arrow { display: none; }
             .fp-cs-dots { bottom: 1rem; }
         }
-        </style>
+        @media (prefers-color-scheme: light) {
+        .fp-cs-dot.active {
+            background-color: var(--gold) !important;
+            transform: scale(1.2);
+        }
+        .fp-cs-img-overlay {
+            background: linear-gradient(to top, rgba(255,255,255,0.9), transparent) !important;
+        }
+        .fp-cs-title {
+            color: #111111 !important;
+        }
+        .fp-cs-desc {
+            color: #333333 !important;
+        }
+        .fp-cs-price, .fp-cs-date {
+            color: var(--gold) !important;
+        }
+        .fp-cs-btn {
+            background-color: var(--gold) !important;
+        }
+        .fp-cs-arrow:hover {
+            background-color: rgba(0,0,0,0.1) !important;
+            color: var(--gold) !important;
+        }
+    }
+</style>
 
         <script>
         (function() {
@@ -460,14 +467,14 @@ $stat_eventos   = $db->querySingle("SELECT COUNT(*) FROM events") ?: 0;
             <div class="fp-how-steps">
                 <div class="fp-how-step">
                     <div class="fp-how-num">01</div>
-                    <div class="fp-how-icon">📝</div>
+                    <div class="fp-how-icon"></div>
                     <h3>Cria a tua conta</h3>
                     <p>Regista-te gratuitamente com o teu email e escolhe o teu username. Demora menos de 1 minuto.</p>
                 </div>
                 <div class="fp-how-connector"></div>
                 <div class="fp-how-step">
                     <div class="fp-how-num">02</div>
-                    <div class="fp-how-icon">🏟️</div>
+                    <div class="fp-how-icon">️</div>
                     <h3>Junta-te a uma academia</h3>
                     <p>O teu instrutor valida o teu Cartão de Cidadão e aceita-te oficialmente na academia.</p>
                 </div>
@@ -513,8 +520,8 @@ $stat_eventos   = $db->querySingle("SELECT COUNT(*) FROM events") ?: 0;
                     <h3><?php echo htmlspecialchars($ac['name']); ?></h3>
                     <p><?php echo htmlspecialchars(mb_substr($ac['description'] ?? '', 0, 80)) . (mb_strlen($ac['description'] ?? '') > 80 ? '...' : ''); ?></p>
                     <div class="fp-academy-stats">
-                        <span class="fp-academy-stat">🥊 <span><?php echo $num_inst; ?></span> Instrutores</span>
-                        <span class="fp-academy-stat">🏆 <span><?php echo $ac['num_titles'] ?? 0; ?></span> Títulos</span>
+                        <span class="fp-academy-stat"><span><?php echo $num_inst; ?></span> Instrutores</span>
+                        <span class="fp-academy-stat"><span><?php echo $ac['num_titles'] ?? 0; ?></span> Títulos</span>
                     </div>
                     <div class="fp-lock-overlay">
                         <p>Entra para ver a grade de aulas e muito mais.</p>
@@ -589,7 +596,7 @@ $stat_eventos   = $db->querySingle("SELECT COUNT(*) FROM events") ?: 0;
 $role = $_SESSION['role'];
 $uid  = (int)$_SESSION['user_id'];
 $badge_class = 'badge-user';   $badge_label = 'Atleta';         $welcome_icon = '🥋';
-if ($role == 'admin')      { $badge_class = 'badge-admin';      $badge_label = 'Administrador'; $welcome_icon = '👑'; }
+if ($role == 'admin')      { $badge_class = 'badge-admin';      $badge_label = 'Administrador'; $welcome_icon = ''; }
 if ($role == 'instructor') { $badge_class = 'badge-instructor'; $badge_label = 'Instrutor';     $welcome_icon = '🥊'; }
 ?>
     <div class="dash-welcome">
@@ -606,7 +613,7 @@ if ($role == 'instructor') { $badge_class = 'badge-instructor'; $badge_label = '
         <span class="dash-welcome-badge <?php echo $badge_class; ?>"><?php echo $badge_label; ?></span>
     </div>
 
-    <?php /* ══════════════ ADMIN ══════════════ */ if ($role == 'admin'): ?>
+    <?php /*  ADMIN  */ if ($role == 'admin'): ?>
     <?php
     $total_academias  = $db->querySingle("SELECT COUNT(*) FROM academies");
     $total_instrutores = $db->querySingle("SELECT COUNT(*) FROM instructors");
@@ -617,34 +624,34 @@ if ($role == 'instructor') { $badge_class = 'badge-instructor'; $badge_label = '
     <div class="dash-stats">
         <div class="dash-stat-card red">
             <div class="dash-stat-num"><?php echo $total_academias; ?></div>
-            <div class="dash-stat-label">🏟️ Academias</div>
+            <div class="dash-stat-label">Academias</div>
         </div>
         <div class="dash-stat-card">
             <div class="dash-stat-num"><?php echo $total_instrutores; ?></div>
-            <div class="dash-stat-label">🥊 Instrutores</div>
+            <div class="dash-stat-label">Instrutores</div>
         </div>
         <div class="dash-stat-card green">
             <div class="dash-stat-num"><?php echo $total_alunos; ?></div>
-            <div class="dash-stat-label">🥋 Atletas</div>
+            <div class="dash-stat-label">Atletas</div>
         </div>
         <div class="dash-stat-card gold">
             <div class="dash-stat-num"><?php echo $total_eventos; ?></div>
-            <div class="dash-stat-label">🏆 Eventos</div>
+            <div class="dash-stat-label">Eventos</div>
         </div>
     </div>
 
     <div class="dash-grid">
         <div class="dash-panel">
             <div class="dash-panel-header">
-                <h2>⚡ Atalhos de Administração</h2>
+                <h2>Atalhos de Administração</h2>
             </div>
             <div class="dash-panel-body">
                 <div class="dash-shortcuts">
-                    <a href="admin.php" class="dash-shortcut"><span>🛠️</span><small>Painel Admin</small></a>
-                    <a href="admin_announcements.php" class="dash-shortcut"><span>📌</span><small>Gerir Avisos</small></a>
-                    <a href="academies.php" class="dash-shortcut"><span>🏟️</span><small>Academias</small></a>
+                    <a href="admin.php" class="dash-shortcut"><span>️</span><small>Painel Admin</small></a>
+                    <a href="admin_announcements.php" class="dash-shortcut"><span></span><small>Gerir Avisos</small></a>
+                    <a href="academies.php" class="dash-shortcut"><span>️</span><small>Academias</small></a>
                     <a href="instructors.php" class="dash-shortcut"><span>🥊</span><small>Instrutores</small></a>
-                    <a href="events.php" class="dash-shortcut"><span>🏆</span><small>Eventos</small></a>
+                    <a href="events.php" class="dash-shortcut"><span></span><small>Eventos</small></a>
                     <a href="graduation.php" class="dash-shortcut"><span>🥋</span><small>Graduações</small></a>
                 </div>
             </div>
@@ -652,7 +659,7 @@ if ($role == 'instructor') { $badge_class = 'badge-instructor'; $badge_label = '
 
         <div class="dash-panel">
             <div class="dash-panel-header">
-                <h2>📌 Últimos Avisos</h2>
+                <h2>Últimos Avisos</h2>
                 <a href="admin_announcements.php">Gerir →</a>
             </div>
             <div class="dash-panel-body">
@@ -667,14 +674,14 @@ if ($role == 'instructor') { $badge_class = 'badge-instructor'; $badge_label = '
                     </div>
                 <?php }
                 if (!$tem_aviso): ?>
-                    <div class="dash-empty"><span>📭</span>Sem avisos publicados.</div>
+                    <div class="dash-empty"><span></span>Sem avisos publicados.</div>
                 <?php endif; ?>
             </div>
         </div>
 
         <div class="dash-panel">
             <div class="dash-panel-header">
-                <h2>🏟️ Academias Registadas</h2>
+                <h2>Academias Registadas</h2>
                 <a href="admin.php">Gerir →</a>
             </div>
             <div class="dash-panel-body">
@@ -683,17 +690,17 @@ if ($role == 'instructor') { $badge_class = 'badge-instructor'; $badge_label = '
                 $has_ac = false;
                 while ($ac = $ac_list->fetchArray(SQLITE3_ASSOC)) { $has_ac = true; ?>
                 <div style="padding:0.6rem 0; border-bottom:1px solid #262626; font-size:0.95rem; color:#ccc;">
-                    🏟️ <?php echo htmlspecialchars($ac['name']); ?>
+                    <?php echo htmlspecialchars($ac['name']); ?>
                 </div>
                 <?php }
                 if (!$has_ac): ?>
-                    <div class="dash-empty"><span>🏗️</span>Nenhuma academia ainda.</div>
+                    <div class="dash-empty"><span>️</span>Nenhuma academia ainda.</div>
                 <?php endif; ?>
             </div>
         </div>
     </div>
 
-    <?php /* ══════════════ INSTRUTOR ══════════════ */ elseif ($role == 'instructor'): ?>
+    <?php /*  INSTRUTOR  */ elseif ($role == 'instructor'): ?>
     <?php
     $stmt_profile = $db->prepare("SELECT i.id as iid, i.name as iname, i.academy_id, a.name as aname FROM users u JOIN instructors i ON u.instructor_id = i.id JOIN academies a ON i.academy_id = a.id WHERE u.id = :uid");
     $stmt_profile->bindValue(':uid', $uid, SQLITE3_INTEGER);
@@ -707,44 +714,44 @@ if ($role == 'instructor') { $badge_class = 'badge-instructor'; $badge_label = '
     <div class="dash-stats">
         <div class="dash-stat-card red">
             <div class="dash-stat-num"><?php echo $total_aulas; ?></div>
-            <div class="dash-stat-label">📅 Aulas na Grade</div>
+            <div class="dash-stat-label">Aulas na Grade</div>
         </div>
         <div class="dash-stat-card green">
             <div class="dash-stat-num"><?php echo $total_alunos; ?></div>
-            <div class="dash-stat-label">🥋 Alunos na Academia</div>
+            <div class="dash-stat-label">Alunos na Academia</div>
         </div>
         <div class="dash-stat-card gold">
             <div class="dash-stat-num"><?php echo $total_grads; ?></div>
-            <div class="dash-stat-label">🏆 Graduações Realizadas</div>
+            <div class="dash-stat-label">Graduações Realizadas</div>
         </div>
     </div>
 
     <?php if ($profile): ?>
     <div style="background:#111; color:#fff; border-radius:8px; padding:1rem 1.5rem; margin-bottom:1.5rem; font-size:0.9rem; border-left:4px solid #d32f2f;">
-        📍 A gerir a academia: <strong><?php echo htmlspecialchars($profile['aname']); ?></strong>
+         A gerir a academia: <strong><?php echo htmlspecialchars($profile['aname']); ?></strong>
     </div>
     <?php endif; ?>
 
     <div class="dash-grid">
         <div class="dash-panel">
             <div class="dash-panel-header">
-                <h2>⚡ Atalhos Rápidos</h2>
+                <h2>Atalhos Rápidos</h2>
             </div>
             <div class="dash-panel-body">
                 <div class="dash-shortcuts">
-                    <a href="painel_instructor.php" class="dash-shortcut"><span>📋</span><small>Painel</small></a>
-                    <a href="instructor_attendance.php" class="dash-shortcut"><span>✅</span><small>Presenças</small></a>
-                    <a href="manage_students.php" class="dash-shortcut"><span>👥</span><small>Alunos</small></a>
+                    <a href="painel_instructor.php" class="dash-shortcut"><span></span><small>Painel</small></a>
+                    <a href="instructor_attendance.php" class="dash-shortcut"><span></span><small>Presenças</small></a>
+                    <a href="manage_students.php" class="dash-shortcut"><span></span><small>Alunos</small></a>
                     <a href="graduation.php" class="dash-shortcut"><span>🥋</span><small>Graduações</small></a>
-                    <a href="events.php" class="dash-shortcut"><span>🏆</span><small>Eventos</small></a>
-                    <a href="academies.php" class="dash-shortcut"><span>🏟️</span><small>Academias</small></a>
+                    <a href="events.php" class="dash-shortcut"><span></span><small>Eventos</small></a>
+                    <a href="academies.php" class="dash-shortcut"><span>️</span><small>Academias</small></a>
                 </div>
             </div>
         </div>
 
         <div class="dash-panel">
             <div class="dash-panel-header">
-                <h2>📅 As Minhas Aulas</h2>
+                <h2>As Minhas Aulas</h2>
                 <a href="painel_instructor.php">Gerir grade →</a>
             </div>
             <div class="dash-panel-body">
@@ -758,21 +765,21 @@ if ($role == 'instructor') { $badge_class = 'badge-instructor'; $badge_label = '
                         <div class="aula-time"><?php echo htmlspecialchars($aula['time']); ?></div>
                         <div class="aula-info">
                             <strong><?php echo htmlspecialchars($aula['class_type']); ?></strong>
-                            <span>📆 <?php echo htmlspecialchars($aula['day']); ?>-feira</span>
+                            <span><?php echo htmlspecialchars($aula['day']); ?>-feira</span>
                         </div>
                     </div>
                     <?php }
                     if (!$has_aulas): ?>
-                        <div class="dash-empty"><span>📭</span>Nenhuma aula na grade ainda.</div>
+                        <div class="dash-empty"><span></span>Nenhuma aula na grade ainda.</div>
                     <?php endif;
                 else: ?>
-                    <div class="dash-empty"><span>⚠️</span>Perfil de instrutor não configurado.</div>
+                    <div class="dash-empty"><span>Aviso:</span>Perfil de instrutor não configurado.</div>
                 <?php endif; ?>
             </div>
         </div>
 
         <div class="dash-panel">
-            <div class="dash-panel-header"><h2>📌 Avisos</h2></div>
+            <div class="dash-panel-header"><h2>Avisos</h2></div>
             <div class="dash-panel-body">
                 <?php
                 $tem_aviso = false;
@@ -785,13 +792,13 @@ if ($role == 'instructor') { $badge_class = 'badge-instructor'; $badge_label = '
                     </div>
                 <?php }
                 if (!$tem_aviso): ?>
-                    <div class="dash-empty"><span>📭</span>Sem avisos. Bom treino!</div>
+                    <div class="dash-empty"><span></span>Sem avisos. Bom treino!</div>
                 <?php endif; ?>
             </div>
         </div>
     </div>
 
-    <?php /* ══════════════ ALUNO ══════════════ */ else: ?>
+    <?php /*  ALUNO  */ else: ?>
     <?php
     $sa = $db->prepare("SELECT s.*, a.name as academy_name, a.id as academy_id FROM students s LEFT JOIN academies a ON s.academy_id = a.id WHERE s.user_id = :uid");
     $sa->bindValue(':uid', $uid, SQLITE3_INTEGER);
@@ -854,15 +861,15 @@ if ($role == 'instructor') { $badge_class = 'badge-instructor'; $badge_label = '
     <div class="dash-stats">
         <div class="dash-stat-card red">
             <div class="dash-stat-num"><?php echo $total_grads; ?></div>
-            <div class="dash-stat-label">🏆 Graduações</div>
+            <div class="dash-stat-label">Graduações</div>
         </div>
         <div class="dash-stat-card green">
             <div class="dash-stat-num"><?php echo $total_pres; ?></div>
-            <div class="dash-stat-label">📋 Treinos Marcados</div>
+            <div class="dash-stat-label">Treinos Marcados</div>
         </div>
         <div class="dash-stat-card <?php echo $tem_academia ? 'gold' : ''; ?>">
             <div class="dash-stat-num" style="font-size:1.4rem; <?php echo !$tem_academia ? 'color:#ccc;' : ''; ?>">
-                <?php echo $tem_academia ? '✅' : '⏳'; ?>
+                <?php echo $tem_academia ? 'Sim' : 'Não'; ?>
             </div>
             <div class="dash-stat-label"><?php echo $tem_academia ? htmlspecialchars($aluno['academy_name']) : 'Sem Academia'; ?></div>
         </div>
@@ -870,7 +877,7 @@ if ($role == 'instructor') { $badge_class = 'badge-instructor'; $badge_label = '
 
     <?php if (!$tem_academia): ?>
     <div style="background:#fffbeb; border:1px solid #fcd34d; border-left:4px solid #fbbf24; border-radius:8px; padding:1.2rem 1.5rem; margin-bottom:1.5rem; display:flex; align-items:center; gap:1rem; flex-wrap:wrap;">
-        <span style="font-size:1.5rem;">⚠️</span>
+        <span style="font-size:1.5rem;">Aviso:</span>
         <div>
             <strong style="color:#92400e;">Ainda não tens academia!</strong>
             <p style="margin:0; color:#78350f; font-size:0.9rem;">Aguarda o convite de um instrutor ou explora as academias disponíveis.</p>
@@ -883,7 +890,7 @@ if ($role == 'instructor') { $badge_class = 'badge-instructor'; $badge_label = '
 
         <div class="dash-panel">
             <div class="dash-panel-header">
-                <h2>🥋 Última Graduação</h2>
+                <h2>Última Graduação</h2>
                 <a href="user_profiles.php#historico">Ver histórico →</a>
             </div>
             <div class="dash-panel-body">
@@ -900,14 +907,14 @@ if ($role == 'instructor') { $badge_class = 'badge-instructor'; $badge_label = '
                     </p>
                 </div>
                 <?php else: ?>
-                <div class="dash-empty"><span>💪</span>Ainda sem graduações. Continue treinando!</div>
+                <div class="dash-empty"><span></span>Ainda sem graduações. Continue treinando!</div>
                 <?php endif; ?>
             </div>
         </div>
 
         <div class="dash-panel">
             <div class="dash-panel-header">
-                <h2>📅 Próxima Aula</h2>
+                <h2>Próxima Aula</h2>
                 <?php if ($tem_academia): ?>
                 <a href="academy_details.php?id=<?php echo $aluno['academy_id']; ?>">Ver grade →</a>
                 <?php endif; ?>
@@ -918,20 +925,20 @@ if ($role == 'instructor') { $badge_class = 'badge-instructor'; $badge_label = '
                     <div class="aula-time"><?php echo htmlspecialchars($proxima_aula['time']); ?></div>
                     <div class="aula-info">
                         <strong><?php echo htmlspecialchars($proxima_aula['class_type']); ?></strong>
-                        <span>📆 <?php echo htmlspecialchars($proxima_aula['day']); ?>-feira</span>
+                        <span><?php echo htmlspecialchars($proxima_aula['day']); ?>-feira</span>
                     </div>
                 </div>
                 <?php elseif (!$tem_academia): ?>
-                <div class="dash-empty"><span>🏟️</span>Sem academia associada.</div>
+                <div class="dash-empty"><span>️</span>Sem academia associada.</div>
                 <?php else: ?>
-                <div class="dash-empty"><span>🛋️</span>Não estás inscrito em nenhuma aula.</div>
+                <div class="dash-empty"><span></span>Não estás inscrito em nenhuma aula.</div>
                 <?php endif; ?>
             </div>
         </div>
 
         <div class="dash-panel">
             <div class="dash-panel-header">
-                <h2>📋 Último Treino</h2>
+                <h2>Último Treino</h2>
                 <a href="user_profiles.php#presencas">Ver presenças →</a>
             </div>
             <div class="dash-panel-body">
@@ -941,21 +948,21 @@ if ($role == 'instructor') { $badge_class = 'badge-instructor'; $badge_label = '
                         <?php echo htmlspecialchars($ultima_pres['class_type']); ?>
                     </p>
                     <p style="color:#d32f2f; font-weight:bold; font-size:0.95rem; margin:0;">
-                        🕐 <?php echo htmlspecialchars($ultima_pres['time']); ?>
+                         <?php echo htmlspecialchars($ultima_pres['time']); ?>
                     </p>
                     <p style="color:#888; font-size:0.85rem; margin:0;">
-                        📍 <?php echo htmlspecialchars($ultima_pres['academy_name']); ?> · 
+                         <?php echo htmlspecialchars($ultima_pres['academy_name']); ?> ·
                         <?php echo date('d/m/Y', strtotime($ultima_pres['class_date'])); ?>
                     </p>
                 </div>
                 <?php else: ?>
-                <div class="dash-empty"><span>📭</span>Nenhuma presença registada ainda.</div>
+                <div class="dash-empty"><span></span>Nenhuma presença registada ainda.</div>
                 <?php endif; ?>
             </div>
         </div>
 
         <div class="dash-panel">
-            <div class="dash-panel-header"><h2>📌 Mural de Avisos</h2></div>
+            <div class="dash-panel-header"><h2>Mural de Avisos</h2></div>
             <div class="dash-panel-body">
                 <?php
                 $tem_aviso = false;
@@ -968,22 +975,22 @@ if ($role == 'instructor') { $badge_class = 'badge-instructor'; $badge_label = '
                     </div>
                 <?php }
                 if (!$tem_aviso): ?>
-                    <div class="dash-empty"><span>📭</span>Sem avisos. Bom treino!</div>
+                    <div class="dash-empty"><span></span>Sem avisos. Bom treino!</div>
                 <?php endif; ?>
             </div>
         </div>
 
         <div class="dash-panel">
-            <div class="dash-panel-header"><h2>⚡ Atalhos Rápidos</h2></div>
+            <div class="dash-panel-header"><h2>Atalhos Rápidos</h2></div>
             <div class="dash-panel-body">
                 <div class="dash-shortcuts">
-                    <a href="user_profiles.php" class="dash-shortcut"><span>👤</span><small>Meu Perfil</small></a>
-                    <a href="academies.php" class="dash-shortcut"><span>🏟️</span><small>Academias</small></a>
+                    <a href="user_profiles.php" class="dash-shortcut"><span></span><small>Meu Perfil</small></a>
+                    <a href="academies.php" class="dash-shortcut"><span>️</span><small>Academias</small></a>
                     <a href="graduation.php" class="dash-shortcut"><span>🥋</span><small>Graduações</small></a>
-                    <a href="events.php" class="dash-shortcut"><span>🏆</span><small>Eventos</small></a>
+                    <a href="events.php" class="dash-shortcut"><span></span><small>Eventos</small></a>
                     <a href="instructors.php" class="dash-shortcut"><span>🥊</span><small>Instrutores</small></a>
                     <?php if ($tem_academia): ?>
-                    <a href="academy_details.php?id=<?php echo $aluno['academy_id']; ?>" class="dash-shortcut"><span>🏠</span><small>Minha Academia</small></a>
+                    <a href="academy_details.php?id=<?php echo $aluno['academy_id']; ?>" class="dash-shortcut"><span></span><small>Minha Academia</small></a>
                     <?php endif; ?>
                 </div>
             </div>
