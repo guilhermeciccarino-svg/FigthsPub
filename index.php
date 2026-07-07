@@ -19,10 +19,8 @@ $stat_eventos   = $db->querySingle("SELECT COUNT(*) FROM events") ?: 0;
 ?>
 
 <?php if (!isset($_SESSION['user_id'])): ?>
-<!-- VISITANTE — Landing Page -->
 <main class="fp-main">
 
-    <!-- HERO -->
     <section class="fp-hero">
         <p class="fp-hero-eyebrow">Zona de Combate · Est. 2026</p>
         <h1>FIGHT <span>PUB</span></h1>
@@ -33,7 +31,6 @@ $stat_eventos   = $db->querySingle("SELECT COUNT(*) FROM events") ?: 0;
         </div>
     </section>
 
-    <!-- BARRA DE ESTATÍSTICAS ANIMADAS -->
     <section class="fp-stats-bar">
         <div class="fp-stats-inner">
             <div class="fp-stat-item">
@@ -62,7 +59,6 @@ $stat_eventos   = $db->querySingle("SELECT COUNT(*) FROM events") ?: 0;
         </div>
     </section>
 
-    <!-- CARROSSEL DE FUNCIONALIDADES -->
     <section class="fp-carousel-section">
         <div class="fp-carousel-header">
             <h2>Tudo o que precisas, num só lugar</h2>
@@ -72,7 +68,6 @@ $stat_eventos   = $db->querySingle("SELECT COUNT(*) FROM events") ?: 0;
         <div class="fp-carousel-wrapper">
             <div class="fp-carousel-track" id="carouselTrack">
 
-                <!-- SLIDE 1 — imagem esquerda, texto direita -->
                 <div class="fp-carousel-slide">
                     <div class="fp-cs-image">
                         <img src="https://pt.quizur.com/_image?href=https%3A%2F%2Fimg.quizur.com%2Ff%2Fimg647d693a3e9cb1.28506085.jpg%3FlastEdited%3D1685940544&w=600&h=600&f=webp" alt="Academias">
@@ -87,7 +82,6 @@ $stat_eventos   = $db->querySingle("SELECT COUNT(*) FROM events") ?: 0;
                     </div>
                 </div>
 
-                <!-- SLIDE 2 — texto esquerda, imagem direita -->
                 <div class="fp-carousel-slide fp-slide-reverse">
                     <div class="fp-cs-content fp-cs-left">
                         <span class="fp-cs-icon">🥋</span>
@@ -102,7 +96,6 @@ $stat_eventos   = $db->querySingle("SELECT COUNT(*) FROM events") ?: 0;
                     </div>
                 </div>
 
-                <!-- SLIDE 3 — imagem esquerda, texto direita -->
                 <div class="fp-carousel-slide">
                     <div class="fp-cs-image">
                         <img src="https://imgnike-a.akamaihd.net/strapi/nike/artes_marciais_interna_desktop_mobile_cc9d97b3e6/artes_marciais_interna_desktop_mobile_cc9d97b3e6.jpg" alt="Presenças">
@@ -117,7 +110,6 @@ $stat_eventos   = $db->querySingle("SELECT COUNT(*) FROM events") ?: 0;
                     </div>
                 </div>
 
-                <!-- SLIDE 4 — texto esquerda, imagem direita -->
                 <div class="fp-carousel-slide fp-slide-reverse">
                     <div class="fp-cs-content fp-cs-left">
                         <span class="fp-cs-icon"></span>
@@ -132,7 +124,6 @@ $stat_eventos   = $db->querySingle("SELECT COUNT(*) FROM events") ?: 0;
                     </div>
                 </div>
 
-                <!-- SLIDE 5 — imagem esquerda, texto direita -->
                 <div class="fp-carousel-slide">
                     <div class="fp-cs-image">
                         <img src="https://st3.depositphotos.com/5311026/34640/i/450/depositphotos_346408696-stock-photo-woman-exercising-with-trainer-at.jpg" alt="Convites">
@@ -147,7 +138,6 @@ $stat_eventos   = $db->querySingle("SELECT COUNT(*) FROM events") ?: 0;
                     </div>
                 </div>
 
-                <!-- SLIDE 6 — texto esquerda, imagem direita -->
                 <div class="fp-carousel-slide fp-slide-reverse">
                     <div class="fp-cs-content fp-cs-left">
                         <span class="fp-cs-icon"></span>
@@ -162,13 +152,9 @@ $stat_eventos   = $db->querySingle("SELECT COUNT(*) FROM events") ?: 0;
                     </div>
                 </div>
 
-            </div><!-- /track -->
-
-            <!-- Setas de navegação -->
-            <button class="fp-cs-arrow fp-cs-arrow-prev" onclick="carouselPrev()" aria-label="Anterior">&#8592;</button>
+            </div><button class="fp-cs-arrow fp-cs-arrow-prev" onclick="carouselPrev()" aria-label="Anterior">&#8592;</button>
             <button class="fp-cs-arrow fp-cs-arrow-next" onclick="carouselNext()" aria-label="Próximo">&#8594;</button>
 
-            <!-- Dots -->
             <div class="fp-cs-dots" id="carouselDots">
                 <button class="fp-cs-dot active" onclick="carouselGoTo(0)"></button>
                 <button class="fp-cs-dot" onclick="carouselGoTo(1)"></button>
@@ -457,7 +443,6 @@ $stat_eventos   = $db->querySingle("SELECT COUNT(*) FROM events") ?: 0;
         </script>
     </section>
 
-    <!-- COMO FUNCIONA -->
     <section class="fp-how-section">
         <div class="fp-how-inner">
             <div class="fp-how-header">
@@ -492,7 +477,6 @@ $stat_eventos   = $db->querySingle("SELECT COUNT(*) FROM events") ?: 0;
         </div>
     </section>
 
-    <!-- FRASE MANIFESTO -->
     <section class="fp-manifesto">
         <div class="fp-manifesto-inner">
             <span class="fp-manifesto-quote-mark">"</span>
@@ -503,7 +487,6 @@ $stat_eventos   = $db->querySingle("SELECT COUNT(*) FROM events") ?: 0;
         </div>
     </section>
 
-    <!-- PRÉ-VISUALIZAÇÃO DE ACADEMIAS -->
     <section class="fp-preview">
         <div class="fp-preview-inner">
             <h2 class="fp-preview-title">Academias em Destaque</h2>
@@ -539,7 +522,6 @@ $stat_eventos   = $db->querySingle("SELECT COUNT(*) FROM events") ?: 0;
         </div>
     </section>
 
-    <!-- CALL TO ACTION FINAL -->
     <section class="fp-cta">
         <div class="fp-cta-inner">
             <span class="fp-cta-eyebrow">Junta-te à comunidade</span>
@@ -552,7 +534,6 @@ $stat_eventos   = $db->querySingle("SELECT COUNT(*) FROM events") ?: 0;
         </div>
     </section>
 
-    <!-- JS: Contador animado com IntersectionObserver -->
     <script>
     (function() {
         function animateCount(el, target, duration) {
@@ -598,22 +579,37 @@ $uid  = (int)$_SESSION['user_id'];
 $badge_class = 'badge-user';   $badge_label = 'Atleta';         $welcome_icon = '🥋';
 if ($role == 'admin')      { $badge_class = 'badge-admin';      $badge_label = 'Administrador'; $welcome_icon = ''; }
 if ($role == 'instructor') { $badge_class = 'badge-instructor'; $badge_label = 'Instrutor';     $welcome_icon = '🥊'; }
+
+// Fetch the user's avatar
+$stmt_avatar = $db->prepare("SELECT avatar FROM users WHERE id = :id");
+$stmt_avatar->bindValue(':id', $uid, SQLITE3_INTEGER);
+$user_data = $stmt_avatar->execute()->fetchArray(SQLITE3_ASSOC);
+$user_avatar = $user_data['avatar'] ?? null;
 ?>
-    <div class="dash-welcome">
-        <div class="dash-welcome-text">
-            <h1><?php echo $welcome_icon; ?> Olá, <?php echo htmlspecialchars($_SESSION['username']); ?>!</h1>
-            <p>Hoje é <strong style="color:#fff"><?php echo $hoje_nome; ?>-feira</strong>.
-            <?php
-            if ($role == 'admin')          echo 'O tatame está sob o teu comando.';
-            elseif ($role == 'instructor') echo 'Os teus alunos contam contigo.';
-            else                           echo 'Bom treino — um dia de cada vez.';
-            ?>
-            </p>
+    <div class="dash-welcome" style="display: flex; align-items: center; justify-content: space-between;">
+        <div style="display: flex; align-items: center; gap: 1.5rem;">
+            <div class="profile-avatar" style="width: 80px; height: 80px; border: 3px solid #d32f2f; border-radius: 50%; display: flex; align-items: center; justify-content: center; overflow: hidden; background: #1a1a1a; flex-shrink: 0;">
+                <?php if (!empty($user_avatar)): ?>
+                    <img src="<?php echo htmlspecialchars($user_avatar); ?>" alt="Avatar" style="width: 100%; height: 100%; object-fit: cover;">
+                <?php else: ?>
+                    <span style="font-size: 2.5rem;"><?php echo $welcome_icon; ?></span>
+                <?php endif; ?>
+            </div>
+            <div class="dash-welcome-text">
+                <h1 style="text-transform: uppercase;">OLÁ, <?php echo htmlspecialchars($_SESSION['username']); ?>!</h1>
+                <p>Hoje é <strong style="color:#fff"><?php echo $hoje_nome; ?>-feira</strong>.
+                <?php
+                if ($role == 'admin')          echo 'O tatame está sob o teu comando.';
+                elseif ($role == 'instructor') echo 'Os teus alunos contam contigo.';
+                else                           echo 'Bom treino — um dia de cada vez.';
+                ?>
+                </p>
+            </div>
         </div>
         <span class="dash-welcome-badge <?php echo $badge_class; ?>"><?php echo $badge_label; ?></span>
     </div>
 
-    <?php /*  ADMIN  */ if ($role == 'admin'): ?>
+    <?php /* ADMIN  */ if ($role == 'admin'): ?>
     <?php
     $total_academias  = $db->querySingle("SELECT COUNT(*) FROM academies");
     $total_instrutores = $db->querySingle("SELECT COUNT(*) FROM instructors");
@@ -700,7 +696,7 @@ if ($role == 'instructor') { $badge_class = 'badge-instructor'; $badge_label = '
         </div>
     </div>
 
-    <?php /*  INSTRUTOR  */ elseif ($role == 'instructor'): ?>
+    <?php /* INSTRUTOR  */ elseif ($role == 'instructor'): ?>
     <?php
     $stmt_profile = $db->prepare("SELECT i.id as iid, i.name as iname, i.academy_id, a.name as aname FROM users u JOIN instructors i ON u.instructor_id = i.id JOIN academies a ON i.academy_id = a.id WHERE u.id = :uid");
     $stmt_profile->bindValue(':uid', $uid, SQLITE3_INTEGER);
@@ -798,7 +794,7 @@ if ($role == 'instructor') { $badge_class = 'badge-instructor'; $badge_label = '
         </div>
     </div>
 
-    <?php /*  ALUNO  */ else: ?>
+    <?php /* ALUNO  */ else: ?>
     <?php
     $sa = $db->prepare("SELECT s.*, a.name as academy_name, a.id as academy_id FROM students s LEFT JOIN academies a ON s.academy_id = a.id WHERE s.user_id = :uid");
     $sa->bindValue(':uid', $uid, SQLITE3_INTEGER);
