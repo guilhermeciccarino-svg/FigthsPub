@@ -226,7 +226,7 @@ $users = $db->query("SELECT * FROM users WHERE role = 'user' ORDER BY username")
             </table>
         </div>
     </div>
-
+    
     <div class="admin-section section-academies">
         <h2>Gerenciar Academias</h2>
 
