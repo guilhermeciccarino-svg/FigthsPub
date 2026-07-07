@@ -374,6 +374,33 @@ $stat_eventos   = $db->querySingle("SELECT COUNT(*) FROM events") ?: 0;
             .fp-cs-arrow { display: none; }
             .fp-cs-dots { bottom: 1rem; }
         }
+
+        /* Estilos do Modo Claro (Light Mode) */
+        @media (prefers-color-scheme: light) {
+            .fp-cs-dot.active {
+                background-color: var(--gold) !important;
+                transform: scale(1.2);
+            }
+            .fp-cs-img-overlay {
+                background: linear-gradient(to top, rgba(255,255,255,0.9), transparent) !important;
+            }
+            .fp-cs-title {
+                color: #111111 !important;
+            }
+            .fp-cs-desc {
+                color: #333333 !important;
+            }
+            .fp-cs-price, .fp-cs-date {
+                color: var(--gold) !important;
+            }
+            .fp-cs-btn {
+                background-color: var(--gold) !important;
+            }
+            .fp-cs-arrow:hover {
+                background-color: rgba(0,0,0,0.1) !important;
+                color: var(--gold) !important;
+            }
+        }
         </style>
 
         <script>
